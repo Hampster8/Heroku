@@ -4,9 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Lab 4 - Web Services</title>
 </head>
 <body>
-    <h1>Tjo flöjt</h1>
+    <br>
+    <h1 align="center">Working App with Heroku</h1>
+    <h2 align="center">Hampus Andersson</h2>
+    <script src="secure.js"></script>
+
+    <div class="wrapper">
+        <span>Joke Generator</span>
+        <p id="joke"></p>
+        <button id="btn">Generate Joke</button>
+        <script>
+            const jokeContainer = document.getElementById("joke");
+            const btn = document.getElementById("btn");
+            const url = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single";
+            let getJoke = () => {
+                jokeContainer.classList.remove("fade");
+                fetch(url)
+                .then(data => data.json())
+                .then(item =>{
+                    jokeContainer.textContent = `${item.joke}`;
+                    jokeContainer.classList.add("fade");
+                });
+            }
+            btn.addEventListener("click",getJoke);
+            getJoke();
+        </script>
+    </div>
+
 </body>
 </html>
